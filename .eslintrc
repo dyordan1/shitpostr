@@ -3,6 +3,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "root": true,
+  "ignorePatterns": ["environment.d.ts"],
   "rules": {
     "array-bracket-newline": [
         "error",

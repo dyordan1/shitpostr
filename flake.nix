@@ -12,14 +12,19 @@
       {
         devShells.default = pkgs.mkShellNoCC {
           buildInputs = with pkgs; [
-            pkgs.nodejs-18_x
+            # Infra
+            google-cloud-sdk
+            terraform
 
+            # JS
+            pkgs.nodejs-18_x
             nodePackages.pnpm
             nodePackages.typescript
             nodePackages.typescript-language-server
           ];
 
           shellHook = ''
+            export $(cat .env | xargs)
             npm i
           '';
         };

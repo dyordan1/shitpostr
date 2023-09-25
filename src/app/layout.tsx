@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import React from "react";
 import ReduxProvider from "@/components/ReduxProvider";
+import NextAuthProvider from "@/components/NextAuthProvider";
 
 const inter = Inter({ subsets: [ "latin" ] });
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: {
     return (
         <html lang="en">
             <ReduxProvider>
-                <body className={inter.className}>{children}</body>
+                <NextAuthProvider>
+                    <body className={inter.className}>{children}</body>
+                </NextAuthProvider>
             </ReduxProvider>
         </html>
     );

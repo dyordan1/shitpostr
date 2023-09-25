@@ -6,9 +6,15 @@ import {
 import { Menu } from "@mui/icons-material";
 import { toggleDrawer } from "@/store/uiSlice";
 import { useDispatch } from "react-redux";
+import {
+    signIn, signOut, useSession, 
+} from "next-auth/react";
 
 export default function Header() {
     const dispatch = useDispatch();
+    const {
+        data: session, status, 
+    } = useSession();
 
     return (
         <AppBar position="fixed" sx={{ zIndex: 9999 }}>
@@ -28,7 +34,16 @@ export default function Header() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Shitpostr
                 </Typography>
-                <Button color="inherit">Login</Button>
+                {status === "authenticated"
+                    ? <Button onClick={() => signOut()} color="inherit">
+                        Logout
+                    </Button>
+                    : <Button onClick={() => signIn()} color="inherit">
+                        Login
+                    </Button>}
+                <div>
+                    {status === "authenticated" && session.user?.name}
+                </div>
             </Toolbar>
         </AppBar>
     );
